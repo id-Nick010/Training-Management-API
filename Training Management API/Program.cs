@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Training_Management_API.Data;
+using Training_Management_API.Models;
+using Training_Management_API.Repositories.Implementations;
+using Training_Management_API.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +15,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<TrainingManagerDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<ITrainingProgramRepository, TrainingProgramRepository>();
+builder.Services.AddScoped<ITrainerRepository, TrainerRepository>();
+builder.Services.AddScoped<IParticipantRepository, ParticipantRepository>();
 
 var app = builder.Build();
 
