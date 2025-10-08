@@ -36,11 +36,11 @@ namespace Training_Management_API.Controllers
             return Ok(dto);
         }
 
-        [HttpGet("by-training/{trainingProgramId}")]
+        [HttpGet("by-training/{trainingId}")]
         public async Task<IActionResult> GetByTrainingProgramId(int trainingId)
         {
             var participants = await _service.GetParticipantsByTrainingProgramIdAsync(trainingId);
-            var dtoList = _mapper.Map<List<ParticipantDto>>(participants);
+            var dtoList = _mapper.Map<List<ParticipantSlimDto>>(participants);
             return Ok(dtoList);
         }
 

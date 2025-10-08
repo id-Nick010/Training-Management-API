@@ -12,8 +12,8 @@ using Training_Management_API.Data;
 namespace Training_Management_API.Migrations
 {
     [DbContext(typeof(TrainingManagerDbContext))]
-    [Migration("20251007091933_InitialCreation")]
-    partial class InitialCreation
+    [Migration("20251008074635_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,8 +27,11 @@ namespace Training_Management_API.Migrations
 
             modelBuilder.Entity("Training_Management_API.Models.Participant", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Department")
                         .IsRequired()

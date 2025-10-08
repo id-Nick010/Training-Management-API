@@ -12,7 +12,6 @@ namespace Training_Management_API.Mappings
             CreateMap<TrainingProgram, TrainingProgramDto>()
                 .ForMember(dest => dest.TrainerName, opt => opt.MapFrom(src => src.Trainer.Name))
                 .ForMember(dest => dest.ParticipantNames, opt => opt.MapFrom(src => src.Participants.Select(p => p.Name).ToList()));
-
             CreateMap<CreateTrainingDto, TrainingProgram>();
 
             // Trainer map
@@ -22,8 +21,8 @@ namespace Training_Management_API.Mappings
             // Participant map
             CreateMap<Participant, ParticipantDto>()
                 .ForMember(dest => dest.TrainingTitle, opt => opt.MapFrom(src => src.TrainingProgram.Title));
-
             CreateMap<CreateParticipantDto, Participant>();
+            CreateMap<Participant, ParticipantSlimDto>();
         }
     }
 }

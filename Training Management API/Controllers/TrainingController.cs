@@ -75,7 +75,6 @@ namespace Training_Management_API.Controllers
             return NoContent();
         }
 
-
     }
 
 }

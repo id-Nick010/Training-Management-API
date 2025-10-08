@@ -9,9 +9,23 @@ namespace Training_Management_API.Repositories.Implementations
     {
         public ParticipantRepository(TrainingManagerDbContext context) : base(context){ }
 
+        public override async Task<IEnumerable<Participant>> GetAllAsync()
+        {
+            return await _context.Set<Participant>()
+                .Include(p => p.TrainingProgram)
+                .ToListAsync();
+        }
+
+        public override async Task<Participant?> GetByIdAsync(int id)
+        {
+            return await _context.Set<Participant>()
+                .Include(p => p.TrainingProgram)
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
         public async Task<IEnumerable<Participant>> GetByTrainingProgramIdAsync(int trainingProgramId)
         {
-            return await _dbSet
+            return await _context.Participants
                 .Where(p => p.TrainingProgramId == trainingProgramId)
                 .ToListAsync();
         }

@@ -20,8 +20,8 @@ namespace Training_Management_API.Services.Implementations
         public Task<Participant?> GetParticipantByIdAsync(int id)
             => _participantRepo.GetByIdAsync(id);
 
-        public Task<IEnumerable<Participant>> GetParticipantsByTrainingProgramIdAsync(int id)
-            => _participantRepo.GetByTrainingProgramIdAsync(id);
+        public Task<IEnumerable<Participant>> GetParticipantsByTrainingProgramIdAsync(int trainingId)
+            => _participantRepo.GetByTrainingProgramIdAsync(trainingId);
 
         public Task CreateParticipantAsync(Participant participant)
             => _participantRepo.AddAsync(participant);

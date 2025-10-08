@@ -17,7 +17,6 @@ namespace Training_Management_API.DTOs
         [Required]
         public DateTime EndDate { get; set; }
 
-        [Required]
         [Range(1, int.MaxValue, ErrorMessage = "TrainerId must be a positive number")]
         public int TrainerId { get; set; }
     }
