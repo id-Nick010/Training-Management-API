@@ -4,7 +4,7 @@ namespace Training_Management_API.Models
 {
     public class Participant
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }
