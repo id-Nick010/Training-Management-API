@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using System.Text.Json;
 using Training_Management_API.Data;
 using Training_Management_API.Mappings;
 using Training_Management_API.Models;
@@ -53,6 +55,24 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Unxpected error handling gives clear json response instead of a stack trace
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        context.Response.StatusCode = 500;
+        context.Response.ContentType = "application/json";
+
+        var error = context.Features.Get<IExceptionHandlerFeature>();
+        if (error != null)
+        {
+            var result = JsonSerializer.Serialize(new { error = error.Error.Message });
+            await context.Response.WriteAsync(result);
+        }
+    });
+});
+
 
 app.UseHttpsRedirection();
 
