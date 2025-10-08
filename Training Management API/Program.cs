@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Training_Management_API.Data;
+using Training_Management_API.Mappings;
 using Training_Management_API.Models;
 using Training_Management_API.Repositories.Implementations;
 using Training_Management_API.Repositories.Interfaces;
@@ -14,6 +15,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(cfg => { }, typeof(MappingProfile).Assembly);
 
 builder.Services.AddDbContext<TrainingManagerDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
