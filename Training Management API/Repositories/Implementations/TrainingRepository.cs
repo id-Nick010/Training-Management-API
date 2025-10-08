@@ -4,8 +4,8 @@ using Training_Management_API.Data;
 
 namespace Training_Management_API.Repositories.Implementations
 {
-    public class TrainingProgramRepository : Repository<TrainingProgram>, ITrainingProgramRepository
+    public class TrainingRepository : Repository<TrainingProgram>, ITrainingRepository
     {
-        public TrainingProgramRepository(TrainingManagerDbContext context) : base(context) { }
+        public TrainingRepository(TrainingManagerDbContext context) : base(context) { }
     }
 }

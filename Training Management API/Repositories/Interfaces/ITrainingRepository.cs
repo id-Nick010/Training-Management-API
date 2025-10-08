@@ -2,7 +2,7 @@
 
 namespace Training_Management_API.Repositories.Interfaces
 {
-    public interface ITrainingProgramRepository : IRepository<TrainingProgram>
+    public interface ITrainingRepository : IRepository<TrainingProgram>
     {
     }
 }
