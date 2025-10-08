@@ -1,4 +1,8 @@
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.Text.Json;
 using Training_Management_API.Data;
 using Training_Management_API.Mappings;
 using Training_Management_API.Models;
@@ -14,7 +18,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Training Management API Exercise",
+        Version = "v1",
+        Description = "API for managing training programs"
+    });
+
+    // Adding XML comments for controller summaries
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    options.IncludeXmlComments(xmlPath);
+});
 builder.Services.AddAutoMapper(cfg => { }, typeof(MappingProfile).Assembly);
 
 builder.Services.AddDbContext<TrainingManagerDbContext>(options =>
@@ -37,6 +55,24 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Unxpected error handling gives clear json response instead of a stack trace
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        context.Response.StatusCode = 500;
+        context.Response.ContentType = "application/json";
+
+        var error = context.Features.Get<IExceptionHandlerFeature>();
+        if (error != null)
+        {
+            var result = JsonSerializer.Serialize(new { error = error.Error.Message });
+            await context.Response.WriteAsync(result);
+        }
+    });
+});
+
 
 app.UseHttpsRedirection();
 
