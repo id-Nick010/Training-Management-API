@@ -37,6 +37,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Configuration.AddEnvironmentVariables();
 
+
 // AutoMapper configuration
 builder.Services.AddAutoMapper(cfg => { }, typeof(MappingProfile).Assembly);
 
