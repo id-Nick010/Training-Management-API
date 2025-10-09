@@ -2,6 +2,11 @@
 
 A RESTful ASP.NET Core Web API for managing training programs, trainers, and participants.
 
+This project is a web API built with ASP.NET Core 8.0 that helps manage training programs, trainers, and participants. 
+The code is organized into folders, each with a clear job: Controllers handle web requests, Models define the data, DTOs help transfer data safely, Repositories manage database access, Services contain the main logic, and Mappings use AutoMapper to convert data between formats. 
+The Data folder sets up the database connection, and Migrations help update the database structure. 
+Configuration files like appsettings.json and launchSettings.json store settings for running the app. The API uses Entity Framework Core for working with a SQL Server database and Swagger for easy documentation.
+
 ## Features
 
 ### This API supports:
