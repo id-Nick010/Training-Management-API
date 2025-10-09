@@ -8,14 +8,13 @@ A RESTful ASP.NET Core Web API for managing training programs, trainers, and par
 
 - Creating, updating, deleting training programs
 - Assigning trainers and participants
-- Retrieving trainings by date or department (via query parameters)
 - Viewing training details including trainer and participant list
 
 - CRUD operations for Training Programs, Trainers, and Participants
 - Entity relationships: Trainers lead Training Programs; Participants enroll in Training Programs
 - Data validation and error handling
 - AutoMapper for DTO mapping
-- Swagger/OpenAPI documentation
+- Swagger/OpenAPI documentation (check the docs directory)
 
 ## Project Structure & Tech
 
@@ -73,6 +72,8 @@ Use Visual Studio’s `launchSettings.json` to set environment variables for loc
    ```
 
 ### Apply Database Migration
+1. **Create Migration InitialDB**
+   `Add-Migration InitialDB` for VS Package Manager Console
 
 2. **Run Migrations**  
     `dotnet ef database update` or `Update-Database` for VS
@@ -80,5 +81,12 @@ Use Visual Studio’s `launchSettings.json` to set environment variables for loc
 3. **Start the API**  
     `dotnet run`
 
+4. **Export SQL Script**
+   - `Script-Migration -Output dbsetup.sql` for VS
+   - the generated sql script is in the docs directory
+
 4. **Explore Endpoints**  
-Visit `/swagger` for API documentation.
+   Visit `/swagger` for API documentation.
+   - swagger documentation json is in docs directory
+
+
