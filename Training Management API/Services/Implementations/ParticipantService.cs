@@ -14,6 +14,7 @@ namespace Training_Management_API.Services.Implementations
             _participantRepo = participantRepo;
         }
 
+        // All basic CRUD operations just directed to the repository
         public Task<IEnumerable<Participant>> GetAllParticipantsAsync()
             => _participantRepo.GetAllAsync();
 

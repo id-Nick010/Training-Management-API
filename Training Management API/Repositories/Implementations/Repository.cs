@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
 namespace Training_Management_API.Repositories.Implementations
 {
+    // Main Repository class implementing generic CRUD operations
+    // T is constrained to be a class (entity) can be Trainer, Participant, TrainingProgram, etc.
+    // for custom behavior, derive from this class and override methods as needed
     public class Repository<T> : IRepository<T> where T : class
     {
         protected readonly TrainingManagerDbContext _context;
@@ -16,6 +19,8 @@ namespace Training_Management_API.Repositories.Implementations
             _dbSet = context.Set<T>();
         }
 
+        // Basic CRUD operations to the database
+        // Virtual methods to allow overriding in derived classes
         public virtual async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.ToListAsync();
 
         public virtual async Task<T?> GetByIdAsync(int id) => await _dbSet.FindAsync(id);

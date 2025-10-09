@@ -18,7 +18,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
+
+// Swagger configuration with XML comments
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -33,15 +34,22 @@ builder.Services.AddSwaggerGen(options =>
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
 });
+
+builder.Configuration.AddEnvironmentVariables();
+
+// AutoMapper configuration
 builder.Services.AddAutoMapper(cfg => { }, typeof(MappingProfile).Assembly);
 
+// Database context configuration
 builder.Services.AddDbContext<TrainingManagerDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Dependency Injection for repositories 
 builder.Services.AddScoped<ITrainingRepository, TrainingRepository>();
 builder.Services.AddScoped<ITrainerRepository, TrainerRepository>();
 builder.Services.AddScoped<IParticipantRepository, ParticipantRepository>();
 
+// Dependency Injection for services
 builder.Services.AddScoped<ITrainingService, TrainingService>();
 builder.Services.AddScoped<ITrainerService, TrainerService>();
 builder.Services.AddScoped<IParticipantService, ParticipantService>();

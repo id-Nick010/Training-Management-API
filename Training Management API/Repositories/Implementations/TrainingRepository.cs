@@ -9,6 +9,7 @@ namespace Training_Management_API.Repositories.Implementations
     {
         public TrainingRepository(TrainingManagerDbContext context) : base(context) { }
 
+        // Override from generic repository to include related entities
         public override async Task<IEnumerable<TrainingProgram>> GetAllAsync()
         {
             return await _context.Set<TrainingProgram>()

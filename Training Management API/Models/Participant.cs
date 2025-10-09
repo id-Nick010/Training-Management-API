@@ -12,7 +12,9 @@ namespace Training_Management_API.Models
         public string Department { get; set; }
 
         // Relation
+        // Foreign Key to relate Participant to TrainingProgram
         public int TrainingProgramId { get; set; }
+        // Navigation property to access related data in TrainingProgram
         public TrainingProgram TrainingProgram { get; set; }
     }
 }

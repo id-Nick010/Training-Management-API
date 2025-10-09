@@ -13,6 +13,8 @@ namespace Training_Management_API.Services.Implementations
             _trainerRepo = trainerRepo;
         }
 
+
+        // All basic CRUD operations just directed to the repository
         public Task<IEnumerable<Trainer>> GetAllTrainersAsync()
             => _trainerRepo.GetAllAsync();
 

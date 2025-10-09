@@ -13,6 +13,7 @@ namespace Training_Management_API.Services.Implementations
             _trainingRepo = trainingRepo;
         }
 
+        // All service done by the repository
         public Task<IEnumerable<TrainingProgram>> GetAllTrainingsAsync()
             => _trainingRepo.GetAllAsync();
 

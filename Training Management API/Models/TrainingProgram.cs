@@ -13,10 +13,13 @@ namespace Training_Management_API.Models
         public DateTime EndDate { get; set; }
 
         // Relation
+        // Foreign Key to relate TrainingProgram to Trainer
         public int TrainerId { get; set; }
+        // Navigation property to access related data in Trainer
         public Trainer Trainer { get; set; }
 
-        // Navigation
+        // One to Many relationship
+        // Allows access to all participants in related to a training program
         public ICollection<Participant> Participants { get; set; }
     }
 }
